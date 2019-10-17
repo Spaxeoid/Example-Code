@@ -1,0 +1,77 @@
+//----------------------------------------------
+// Name: Timothy Leach      userID: tjleach
+// Due Date: 12/14/2018
+// Program 6
+// File Name: README
+// Program Purpose:
+//      Answers questions at the end of
+//   assignment page
+//----------------------------------------------
+
+
+Logic:
+    The program will calculate the multiplication
+    of 2 matrices using threads and channels. There
+    are two types of threads, Edge threads and inside
+    threads. The edge threads will send the values
+    of the input matrices to the inside threads that
+    will calculate the multiplication. Every iteration
+    of the inside threads will multiply the sent
+    value and add it to its total. It will then send
+    that number to the thread to its right and below.
+
+Why it works:
+    When the processors get the data, they multiply and
+    add that data to what it already had. Doing this will
+    calculate all of the elements needed for the output
+    matrix.
+
+Variables:
+    rightChannels, passes data to the right neighbor
+    downChannels, passes data to the neighbor below
+    inA, input matrix A
+    inB, input matrix B
+    otuC, output matrix C
+
+1:
+    Thread Pij computes the dot product by receiving
+    the data from i and j, multiplies them, then adds
+    that data to its sum. Then, the thread passes
+    the values to the next thread.
+
+2:
+    Synchronous channels are necessary to avoid
+    having race conditions. Without sync channels
+    the incorrect column/row calculations will be
+    made as the column or row data sent to the thread
+    could change before the calculation is made.
+
+3:
+    T  T  T
+    T  T  T
+    T  T  T
+
+    EOD T  T
+    T   T  T
+    T   T  T
+
+    EOD EOD T
+    EOD T   T
+    T   T   T
+
+    EOD EOD EOD
+    EOD EOD T
+    EOD T   T
+
+    EOD EOD EOD
+    EOD EOD EOD
+    EOD EOD T
+
+    EOD EOD EOD
+    EOD EOD EOD
+    EOD EOD EOD
+
+4:
+    The data must be sent in pairs. If either
+    value is -1, there are no more pairs and the
+    thread can terminate.

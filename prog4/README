@@ -1,0 +1,5 @@
+Timothy Leach
+
+This program is in a working state. It will check if the output file exists
+and will also check if the EXECV ran correctly. I tested the program against
+a few unix default programs. 

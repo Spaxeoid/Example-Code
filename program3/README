@@ -1,0 +1,20 @@
+Question 1: 
+    There are not any race conditions in this computation
+    because none of the threads are ever modifying an item
+    while another thread is trying to read it or modify it
+    itself. 
+Question 2:
+    
+
+Question 3: 
+    The result of the computation cannot be saved back into 
+    x[i] as that would cause a race condition if one of the 
+    other threads needs to use that value which would be 
+    very likely in this case. 
+
+Question 4: 
+    No, having the temporary array B[*,*] ensures that there
+    are no race conditions as it forces the threads to run	
+    one row at a time. There would not be a way to ensure
+    that the program would run without race conditions if 
+    we did not use the temporary array. 

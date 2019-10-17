@@ -1,0 +1,39 @@
+// Thread Main
+
+
+
+#include <iostream>
+#include "thread.h"
+
+
+int main(int argc, char *argv[])
+{
+
+  int n, m, k;
+  m = atoi(argv[1]);
+  n = atoi(argv[2]);
+  k = atoi(argv[3]);
+
+  studentThread *student[k];
+  
+  int i = 0;
+  for(i = 0; i < k; i++)
+    {
+      student[i] = new thread(i);
+      student[i]->Begin();
+    }
+
+  landLordThread landLord(n, m);
+  
+  landLord->Begin();
+  landLord->Join();
+
+  for(i = 0; i < k; i++)
+    {
+      student[i]->Join();
+    }
+
+  cout << "main has ended";
+
+  
+}

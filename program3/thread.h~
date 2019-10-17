@@ -1,0 +1,25 @@
+/*------------------------------------------*/
+/* Program Name: Thread.h   userID: tjleach */
+
+
+#ifndef _THREAD_H
+#define _THREAD_H
+
+#include "ThreadClass.h"
+
+
+class thread : public Thread
+{
+ public: 
+  thread(int x[], int j, int B[], int i);
+ private:
+  //VARIABLES
+  void ThreadFunc();
+  int *x;
+  int *B;
+  int i;
+  int j;
+
+};
+
+#endif

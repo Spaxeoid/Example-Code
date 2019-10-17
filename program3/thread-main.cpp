@@ -1,0 +1,86 @@
+/*---------------------------------------------------*/
+// Name: Timothy Leach          userID: tjleach
+// Due Date: 11/02/2018
+// Program Assignment 3
+// File Name: thread-main.cpp
+// Program Purpose:
+//    This program will read in an int, n, for the number 
+//  of items in the array and will read an array. 
+//  The program will then create n threads that will 
+// calculate the prefix sum of the items in the array. 
+
+
+
+
+#include <iostream>
+#include "thread.h"
+#include <string>
+#include <cmath>
+
+
+int main(int argc, char *argv[])
+{
+  int n; 
+  int i = 0;
+  int j = 0;
+  cout << "Concurrent Prefix Sum Computation\n\n"; 
+  cout << "Number of input data = ";
+  cin >> n;
+  
+  int k = log2(n);
+
+
+  cout << "Input array:\n";
+  int input[n];
+  for(int i = 0; i < n; i++)
+    {
+      cin >> input[i];
+      cout << "   " << input[i];
+    }
+
+
+  cout << "\n";
+  
+  int B[k+1][n];
+
+  for(i = 0; i < n; i++)
+    {
+      B[0][i] = input[i];
+    }
+
+  thread *sum[n]; 
+
+  int ltZeroCheck = 0;
+
+  for(i = 1; i <= k; i++)
+    {
+      for(j = 0; j < n; j++)
+	{
+	  ltZeroCheck = j - pow(2, i-1);
+	  sum[j] = new thread(B[i-1], j, B[i], ltZeroCheck); // Create a thread to handle B[k][i]
+	  sum[j]->Begin();
+	}
+      for(j = 0; j < n; j++)
+	{
+	  sum[j]->Join();
+	}
+
+      // Print out the results from run I
+      
+      cout << "Result after run  " << i << ":\n";
+      for(j = 0; j < n; j++)
+	{
+	  cout << "   " << B[i][j];
+	}
+      cout << "\n";
+    }
+
+  // Output the final prefix sum
+
+  cout << "Final result after run " << k << ":\n";
+  for(i = 0; i < n; i++)
+    {
+      cout << "   " << B[k][i];
+    }
+  cout << "\n";
+}

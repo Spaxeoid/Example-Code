@@ -1,0 +1,39 @@
+TJ Leach
+
+The program works by having missionaries and cannibals arrive at the boat crossing. 
+The boat then randomly chooses to allow 3 cannibals, 3 missionaries, or 
+2 missionaries and a cannibal. 
+
+The program uses a monitor to control who can and can't ride the boat. 
+The monitor makes sure that mutual exclusion is held.
+
+The condition variable riding prevents the riding threads from exiting
+the condition variable canArrived blocks the cannibal from loading
+The condition variable missArrived blocks the missionary from loading. 
+The condition variable loading blocks the boat for loading
+The condition variable boatWaiting blocks the boat for passengers.
+numWaiting holds the number of passengers waiting to ride
+cannibalsWaiting holds the number of cannibals waiting
+missionariesWaiting holds the number of missionaries waiting
+boatState determines if the boat is sailing or waiting
+riders shows the number of passengers on the boat
+
+The boat will wait until there are at least 3 waiting passengers and 
+that the boat is in the ready state. If there are fewer than 3 
+passengers, the boat will wait until there are 3. 
+
+The boat ensures that the riders are safe by having 3 separate options
+for when it is ready to load. It will pick one of the 3 options
+randomly. 
+
+CannibalArrives checks if it is able to board the boat depending 
+on the current number of riders and the boat status. 
+
+MissionaryArrives does the same thing as CannibalArrives. 
+
+BoatReady will allow 3 threads of one of the 3 combinations. MMM, CCC or
+MMC. If they are ready, BoatReady allows them to load. Otherwise, it 
+blocks. 
+
+BoatDone signals all of the riding threads and releases them so they get
+off the boat. 

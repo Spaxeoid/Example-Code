@@ -1,0 +1,4 @@
+My program kind of works but only for a single client. 
+I wasn't sure how to get multiple clients to connect and 
+work together while keeping the server single threaded. 
+The program will read and write to a log file. 
